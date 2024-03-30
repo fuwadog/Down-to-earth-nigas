@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  joystickShootEdge: 1
+  joystickShootEdge: 0.9
   rb: {fileID: 1357362904}
   weapon: {fileID: 320108794}
   joyStick: {fileID: 640568533}

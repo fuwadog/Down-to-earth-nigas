@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public PlayerJoyStick joyStick;
     public PlayerJoyStick shootJoystick;
 
-    public bool canShoot = true;
+    public bool canShoot;
 
 
     Vector2 moveDirection;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         if(joyStick.inputDir != Vector2.zero)
             moveInput = joyStick.inputDir;
 
-        if(Input.GetMouseButton(0) && canShoot)
+        if(Mathf.Abs(shootJoystick.inputDir.x) > 0.8 || Mathf.Abs(shootJoystick.inputDir.y) > 0.8 && canShoot)
         {
             weapon.Fire();
         }

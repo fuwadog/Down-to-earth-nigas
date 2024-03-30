@@ -12,6 +12,8 @@ public class PlayerJoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandle
 
     public Vector2 inputDir;
 
+    public bool shoot;
+
     
     public void OnDrag(PointerEventData eventData)
     {
@@ -33,6 +35,11 @@ public class PlayerJoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandle
                                                                     inputDir.y * (treshold.rectTransform.sizeDelta.y /2.5f));
                 
             }
+
+        if(shoot)
+        {
+            FindObjectOfType<PlayerController>().canShoot = true;
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -42,7 +49,17 @@ public class PlayerJoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandle
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        inputDir = Vector3.zero;
+        if(!shoot)
+        {
+            inputDir = Vector3.zero;
+        }
+        else
+        {
+            FindObjectOfType<PlayerController>().canShoot = false;
+        }
+            
+
+
         touch.rectTransform.anchoredPosition = Vector3.zero;
     }
 

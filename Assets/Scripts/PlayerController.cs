@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 15f;
+    public float joystickShootEdge;
     public Rigidbody2D rb;
     public WeaponController weapon;
 
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
         if(joyStick.inputDir != Vector2.zero)
             moveInput = joyStick.inputDir;
 
-        if(Input.GetMouseButton(0) && canShoot)
+        if(Mathf.Abs(shootJoystick.inputDir.x) > joystickShootEdge || Mathf.Abs(shootJoystick.inputDir.y) > joystickShootEdge && canShoot)
         {
             weapon.Fire();
         }

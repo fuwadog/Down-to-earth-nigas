@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public WeaponController weapon;
 
     public PlayerJoyStick joyStick;
+    public PlayerJoyStick shootJoystick;
+
+    public bool canShoot = true;
+
 
     Vector2 moveDirection;
     Vector2 mousePosition;
@@ -22,10 +26,11 @@ public class PlayerController : MonoBehaviour
         if(joyStick.inputDir != Vector2.zero)
             moveInput = joyStick.inputDir;
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(0) && canShoot)
         {
             weapon.Fire();
         }
+        
 
         moveDirection = moveInput.normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -38,6 +43,11 @@ public class PlayerController : MonoBehaviour
          Vector2 aimDirection = mousePosition - rb.position;
          float aimAngle = Mathf.Atan2(aimDirection.y,aimDirection.x) * Mathf.Rad2Deg - 90f;
          rb.rotation = aimAngle;
+
+        if (shootJoystick.inputDir != Vector2.zero)
+        {
+            aimAngle = Mathf.Atan2(shootJoystick.inputDir.y, shootJoystick.inputDir.x) * Mathf.Rad2Deg + 90f;
+        }
 
     }
 }

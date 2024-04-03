@@ -9,20 +9,27 @@ public class WeaponController : MonoBehaviour
     public float fireforce = 20f;
     public int curClip, maxClip = 10, curAmmo, maxAmmo = 100;
 
-    public float fireRate;
+    public float fireRate = 1;
+    public float nextFire = 10f;
 
-    public bool canFire = true;
+ 
 
-  
+    public PlayerJoyStick shootJoystick;
+    public float joystickShootEdge;
+
 
     private void Update()
     {
-        
+
+        if (Mathf.Abs(shootJoystick.inputDir.x) > joystickShootEdge && Time.time > nextFire || Mathf.Abs(shootJoystick.inputDir.y) > joystickShootEdge && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            Fire();
+        }
     }
 
-    public IEnumerator Fire()
+    public void Fire()
     {
-        canFire = false;
         if (curAmmo > 0)
         {
             GameObject bullet =Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
@@ -30,9 +37,6 @@ public class WeaponController : MonoBehaviour
             curAmmo--;
             Debug.Log(curAmmo);
         }
-
-        StartCoroutine(FireRateManager());
-        yield return null;
     }
 
     public void Reload()
@@ -43,10 +47,5 @@ public class WeaponController : MonoBehaviour
         curAmmo -= reloadAmount;
     }
 
-    IEnumerator FireRateManager()
-    {
-        float timeToFireAgain = 1 / fireRate;
-        yield return new WaitForSeconds(timeToFireAgain);
-        canFire = true;
-    }
+
 }

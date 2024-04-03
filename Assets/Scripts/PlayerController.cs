@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 15f;
-    public float joystickShootEdge;
     public Rigidbody2D rb;
     public WeaponController weapon;
+    public float joystickShootEdge;
 
+    
     public PlayerJoyStick joyStick;
     public PlayerJoyStick shootJoystick;
 
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
 
     Vector2 moveDirection;
-    Vector2 mousePosition;
+    //Vector2 mousePosition;
 
 
     // Update is called once per frame
@@ -25,30 +26,27 @@ public class PlayerController : MonoBehaviour
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         
         if(joyStick.inputDir != Vector2.zero)
-            moveInput = joyStick.inputDir;
+            moveInput = joyStick.GetMove();
 
-        if(Mathf.Abs(shootJoystick.inputDir.x) > joystickShootEdge || Mathf.Abs(shootJoystick.inputDir.y) > joystickShootEdge && canShoot)
+        if (Mathf.Abs(shootJoystick.inputDir.x) > joystickShootEdge || Mathf.Abs(shootJoystick.inputDir.y) > joystickShootEdge && weapon.canFire)
         {
-            weapon.Fire();
+            weapon.StartCoroutine(weapon.Fire());
         }
-        
 
-        moveDirection = moveInput.normalized;
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        moveDirection = moveInput.normalized * speed;
+       // mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void FixedUpdate()
     {
-         rb.velocity = new Vector2(moveDirection.x * speed,moveDirection.y * speed);
+         rb.MovePosition(rb.position +moveDirection * Time.deltaTime);
 
-         Vector2 aimDirection = mousePosition - rb.position;
-         float aimAngle = Mathf.Atan2(aimDirection.y,aimDirection.x) * Mathf.Rad2Deg - 90f;
+         Vector2 aimDirection = shootJoystick.GetRotation() - rb.position;
+         float aimAngle = Mathf.Atan2(shootJoystick.GetRotation().y,shootJoystick.GetRotation().x) * Mathf.Rad2Deg - 90f;
          rb.rotation = aimAngle;
 
-        if (shootJoystick.inputDir != Vector2.zero)
-        {
-            aimAngle = Mathf.Atan2(shootJoystick.inputDir.y, shootJoystick.inputDir.x) * Mathf.Rad2Deg + 90f;
-        }
+     
 
     }
 }

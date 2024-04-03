@@ -9,6 +9,14 @@ public class bullet : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponents))
         {
             enemyComponents.TakeDamage(1);
+            Destroy(this.gameObject);
         }
+
     }
+
+    private void Update()
+    {
+        Destroy(this.gameObject,3);
+    }
+
 }

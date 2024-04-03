@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7501970805272263631}
   - component: {fileID: 4618816261430244573}
   - component: {fileID: 575856803965118600}
-  - component: {fileID: 1542079284282572061}
   - component: {fileID: 3797223117154258366}
+  - component: {fileID: -4406842484282873831}
   m_Layer: 0
   m_Name: Black DIG
   m_TagString: Untagged
@@ -130,20 +130,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1542079284282572061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6767885493727175086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d6d9a5114b90b408a6a12bc82ca455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  maxHealth: 5
 --- !u!61 &3797223117154258366
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -189,3 +175,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-4406842484282873831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6767885493727175086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d6d9a5114b90b408a6a12bc82ca455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10

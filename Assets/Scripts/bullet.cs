@@ -6,7 +6,7 @@ public class bullet : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponents))
+        if (collision.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth enemyComponents))
         {
             enemyComponents.TakeDamage(1);
             Destroy(this.gameObject);

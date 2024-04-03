@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 15f;
     public Rigidbody2D rb;
     public WeaponController weapon;
-    public float joystickShootEdge;
+
 
     
     public PlayerJoyStick joyStick;
@@ -27,11 +27,6 @@ public class PlayerController : MonoBehaviour
         
         if(joyStick.inputDir != Vector2.zero)
             moveInput = joyStick.GetMove();
-
-        if (Mathf.Abs(shootJoystick.inputDir.x) > joystickShootEdge || Mathf.Abs(shootJoystick.inputDir.y) > joystickShootEdge && weapon.canFire)
-        {
-            weapon.StartCoroutine(weapon.Fire());
-        }
 
 
         moveDirection = moveInput.normalized * speed;
